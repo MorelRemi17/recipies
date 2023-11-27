@@ -1,0 +1,25 @@
+<div class="container" *ngIf="recipe">
+  <div class="row">
+    <div class="col-8 m-auto">
+      <div class="card">
+        <img [src]="recipe.imageUrl" class="card-img-top" [alt]="recipe.title">
+        <div class="card-body">
+          <h5 class="card-title">{{recipe.title}}</h5>
+          <p class="card-text">{{recipe.created_at|date: 'à HH:mm, le d MMMM yyyy' }}</p>
+          <p class="card-text">{{recipe.description}}</p>
+          <ul class="list-group list-group-flush">
+            Les ingrédients :
+            <li class="list-group-item" *ngFor="let ingredient of recipe.ingredients.split(', ')">
+              {{ ingredient }}
+            </li>
+          </ul>
+          <p class="card-text">Le temps de preparation est de {{recipe.prepTime}} min et le temps de cuisson est de {{recipe.cookTime}} min !</p>
+          <p class="card-text">Cette recette à était crée par : {{recipe.author}}</p>
+          <button type="button" (click)="GoingBackToTheRecipiesList()" class="btn btn-primary">Retour</button>
+          <button type="button" (click)="deleteRecipe()" class="btn btn-danger">Supprimer</button>
+          <a [routerLink]="['/recipes/edit/', recipe.id]" class="btn btn-primary">Mettre à jour</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

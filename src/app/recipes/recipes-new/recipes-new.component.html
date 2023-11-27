@@ -1,0 +1,75 @@
+<div class="container">
+  <h2>Création d'une nouvelle recette</h2>
+  <div *ngIf="errorMessage" class="alert alert-danger">
+    {{ errorMessage }}
+  </div>
+  <form [formGroup]="recipeForm" (ngSubmit)="onSubmitForm()">
+    <div class="mb-3">
+      <label for="title" class="form-label">Titre</label>
+      <input type="text" class="form-control" id="title" formControlName="title"
+             [ngClass]="{'is-invalid': recipeForm.get('title')?.touched && recipeForm.get('title')?.invalid}">
+      <div *ngIf="recipeForm.get('title')?.touched && recipeForm.get('title')?.errors?.['required']"
+           class="text-danger">
+        Le titre est requis.
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="description" class="form-label">Description</label>
+      <textarea class="form-control" id="description" formControlName="description"
+                [ngClass]="{'is-invalid': recipeForm.get('description')?.touched && recipeForm.get('description')?.invalid}"></textarea>
+      <div *ngIf="recipeForm.get('description')?.touched && recipeForm.get('description')?.errors?.['required']"
+           class="text-danger">
+        La description est requise.
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="ingredients" class="form-label">Ingrédients</label>
+      <input type="text" class="form-control" id="ingredients" formControlName="ingredients"
+             [ngClass]="{'is-invalid': recipeForm.get('ingredients')?.touched && recipeForm.get('ingredients')?.invalid}">
+      <div *ngIf="recipeForm.get('ingredients')?.touched && recipeForm.get('ingredients')?.errors?.['required']"
+           class="text-danger">
+        La liste des ingrédients est requise.
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="imageUrl" class="form-label">URL de l'image</label>
+      <input type="text" class="form-control" id="imageUrl" formControlName="imageUrl"
+             [ngClass]="{'is-invalid': recipeForm.get('imageUrl')?.touched && recipeForm.get('imageUrl')?.invalid}">
+      <div *ngIf="recipeForm.get('imageUrl')?.touched && recipeForm.get('imageUrl')?.errors?.['required']"
+           class="text-danger">
+        L'URL de l'image est requise.
+      </div>
+      <div *ngIf="recipeForm.get('imageUrl')?.touched && recipeForm.get('imageUrl')?.errors?.['pattern']"
+           class="text-danger">
+        Veuillez entrer une URL valide.
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="prepTime" class="form-label">Temps de préparation</label>
+      <input type="number" class="form-control" id="prepTime" formControlName="prepTime"
+             [ngClass]="{'is-invalid': recipeForm.get('prepTime')?.touched && recipeForm.get('prepTime')?.invalid}">
+      <div *ngIf="recipeForm.get('prepTime')?.touched && recipeForm.get('prepTime')?.errors?.['required']"
+           class="text-danger">
+        Le temps de préparation est requis.
+      </div>
+      <div *ngIf="recipeForm.get('prepTime')?.touched && recipeForm.get('prepTime')?.errors?.['pattern']"
+           class="text-danger">
+        Veuillez entrer un nombre valide.
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="cookTime" class="form-label">Temps de cuisson</label>
+      <input type="number" class="form-control" id="cookTime" formControlName="cookTime"
+             [ngClass]="{'is-invalid': recipeForm.get('cookTime')?.touched && recipeForm.get('cookTime')?.invalid}">
+      <div *ngIf="recipeForm.get('cookTime')?.touched && recipeForm.get('cookTime')?.errors?.['required']"
+           class="text-danger">
+        Le temps de cuisson est requis.
+      </div>
+      <div *ngIf="recipeForm.get('cookTime')?.touched && recipeForm.get('cookTime')?.errors?.['pattern']"
+           class="text-danger">
+        Veuillez entrer un nombre valide.
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary" [disabled]="!recipeForm.valid">Créer la recette</button>
+  </form>
+</div>

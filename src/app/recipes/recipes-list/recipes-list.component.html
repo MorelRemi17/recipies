@@ -1,0 +1,31 @@
+<div class="container m-auto">
+  <div class="row my-5">
+    <div class="col-6">
+      <a [routerLink]="['/recipes/new']" class="btn btn-primary">Ajouter une nouvelle recette</a>
+    </div>
+    <div class="col-6">
+      <div *ngIf="noRecipesFound" class="alert alert-warning">
+        Aucune recette trouvée pour votre recherche.
+      </div>
+      <form class="d-flex" (submit)="search(searchBox.value)">
+        <input #searchBox class="form-control" type="search" placeholder="Rechercher par titre" aria-label="Search"
+               (input)="search(searchBox.value)">
+      </form>
+    </div>
+
+  </div>
+  <div class="row">
+    <div class="col-4" *ngFor="let recipe of recipes$|async">
+      <div class="card mt-4">
+        <div class="card-header">
+          Recettes
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">{{recipe.title}}</h5>
+          <p class="card-text">{{recipe.description}}</p>
+          <a [routerLink]="['/recipes', recipe.id]" class="btn btn-primary">Detail</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

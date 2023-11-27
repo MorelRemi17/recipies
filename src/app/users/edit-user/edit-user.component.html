@@ -1,0 +1,46 @@
+<div class="container mt-5">
+  <h2>Mise à jour de l'utilisateur</h2>
+  <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+      <label for="name" class="form-label">Nom</label>
+      <input type="text" class="form-control" id="name" formControlName="name" placeholder="Entrez votre nom"
+             [ngClass]="{'is-invalid': userForm.get('name')?.touched && userForm.get('name')?.invalid}">
+      <div *ngIf="userForm.get('name')?.touched && userForm.get('name')?.errors?.['required']" class="text-danger">
+        Le nom est requis.
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="email" class="form-label">Email</label>
+      <input type="email" class="form-control" id="email" formControlName="email" placeholder="Entrez votre email"
+             [ngClass]="{'is-invalid': userForm.get('email')?.touched && userForm.get('email')?.invalid}">
+      <div *ngIf="userForm.get('email')?.touched && userForm.get('email')?.errors?.['required']" class="text-danger">
+        L'email est requis.
+      </div>
+      <div *ngIf="userForm.get('email')?.touched && userForm.get('email')?.errors?.['email']" class="text-danger">
+        Veuillez entrer une adresse email valide.
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label for="password" class="form-label">Mot de passe</label>
+      <input type="password" class="form-control" id="password" formControlName="password"
+             placeholder="Entrez un nouveau mot de passe"
+             [ngClass]="{'is-invalid': userForm.get('password')?.touched && userForm.get('password')?.invalid}">
+      <div *ngIf="userForm.get('password')?.touched && userForm.get('password')?.errors?.['required']"
+           class="text-danger">
+        Un mot de passe est requis.
+      </div>
+      <div *ngIf="userForm.get('password')?.touched && userForm.get('password')?.errors?.['minlength']"
+           class="text-danger">
+        Le mot de passe doit contenir au moins 8 caractères.
+      </div>
+      <div *ngIf="userForm.get('password')?.touched && userForm.get('password')?.errors?.['pattern']"
+           class="text-danger">
+        Le mot de passe doit contenir au moins un chiffre.
+      </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary" [disabled]="userForm.invalid">Mettre à jour</button>
+  </form>
+</div>

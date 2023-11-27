@@ -1,0 +1,24 @@
+<div class="row">
+    <div class="col-auto m-auto">
+
+        <div class="form-card">
+            <h2>Connexion</h2>
+            <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="text" id="email" formControlName="email" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Mot de passe</label>
+                    <input type="password" id="password" formControlName="password" class="form-control">
+                </div>
+                <button type="submit" class="btn btn-primary" [disabled]="loginForm.invalid">Connexion</button>
+                <div *ngIf="errorMessage" class="alert alert-danger">
+                    {{ errorMessage }}
+                </div>
+            </form>
+            <button (click)="createAccount()" class="btn btn-secondary">Nouveau compte</button>
+        </div>
+
+    </div>
+</div>
